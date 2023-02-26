@@ -14,6 +14,7 @@ export const App = () => {
 
   const addTTN = invoice => {
     setInvoice(prevValue => [...prevValue, invoice]);
+    console.log(invoice);
   };
 
   // const handleDelete = deleteId => {

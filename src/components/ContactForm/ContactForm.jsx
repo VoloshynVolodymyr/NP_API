@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import { Form, Input, Button, InputWrapper, Label } from './ContactForm.styled';
 
@@ -7,7 +6,7 @@ export const ContactForm = ({ onSubmit }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    onSubmit({ id: nanoid(), number });
+    onSubmit({ number });
     console.log(number);
     reset();
   };
@@ -21,8 +20,6 @@ export const ContactForm = ({ onSubmit }) => {
     setNumber('');
   };
 
-  const numberId = nanoid();
-
   return (
     <Form onSubmit={handleFormSubmit}>
       <InputWrapper>
@@ -30,11 +27,10 @@ export const ContactForm = ({ onSubmit }) => {
         <Input
           type="tel"
           name="number"
-          id={numberId}
           value={number}
           onChange={handleInputChange}
           placeholder="Must contain 14 digits"
-          pattern="\d{14}"
+          pattern="\d{3}"
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
