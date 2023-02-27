@@ -4,7 +4,7 @@ const PostAPI = axios.create({
     baseURL: 'https://api.novaposhta.ua/v2.0/json/',
   });
 
-  export const getParcelData = async () => {
+  export const getParcelData = async (activeTTN) => {
     try {
       const response = await PostAPI.post('', {
         apiKey: '70aae1b5b0a566dfad36437c21ec4e5c',
@@ -13,7 +13,7 @@ const PostAPI = axios.create({
         "methodProperties": {
      "Documents" : [
      {
-     "DocumentNumber":"20450668892412",
+     "DocumentNumber":`${activeTTN}`,
      "Phone":"380600000000"
      }
      
