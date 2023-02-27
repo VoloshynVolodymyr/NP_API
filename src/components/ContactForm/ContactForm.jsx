@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Button, InputWrapper, Label } from './ContactForm.styled';
+import { Form, Input, Button, InputWrapper, Span } from './ContactForm.styled';
 
 export const ContactForm = ({ onSubmit, invoice }) => {
   const [number, setNumber] = useState('');
@@ -24,7 +24,8 @@ export const ContactForm = ({ onSubmit, invoice }) => {
     <>
     <Form onSubmit={handleFormSubmit}>
       <InputWrapper>
-        <Label>№ TTN</Label>
+      <Span>№ TTN</Span>
+        {/* <Label>№ TTN</Label> */}
         <Input
           type="tel"
           name="number"
@@ -35,8 +36,9 @@ export const ContactForm = ({ onSubmit, invoice }) => {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
+        <Button type="submit">Get status TTN</Button>
       </InputWrapper>
-      <Button type="submit">Get status TTN</Button>
+      
 
     </Form>
       </>

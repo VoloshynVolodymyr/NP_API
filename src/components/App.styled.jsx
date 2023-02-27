@@ -5,6 +5,8 @@ export const CommonWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
+    min-width: 100%;
+    background-color: ${props => props.theme.colors.containerColor};
 `
 
 

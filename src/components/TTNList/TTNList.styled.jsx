@@ -1,8 +1,14 @@
 import styled from "@emotion/styled";
 
-export const List = styled.li`
+export const Input = styled.input`
     display: flex;
+    text-align: center;
     flex-direction: row;
     align-items: center;
-    margin: 0 auto;
+    padding: 7px;
+    border: none;
+    width: 640px;
+    cursor: pointer;
+    font-size: 32px;
+    color: ${props => props.theme.colors.mainBgColor};
 `
