@@ -1,5 +1,5 @@
 import { getParcelData } from '../../services/api/TTH';
-import { InfoWrapper } from './TTNDetails.styled';
+import { InfoWrapper, Span, Visibility } from './TTNDetails.styled';
 import React, { useState, useEffect } from 'react';
 
 export const TTNDetails = activeTTN => {
@@ -9,7 +9,6 @@ export const TTNDetails = activeTTN => {
   let data;
   useEffect(() => {
     fetchParcelData(active);
-    console.log('Fetching successful');
   }, [active]);
 
   const fetchParcelData = async num => {
@@ -21,10 +20,11 @@ export const TTNDetails = activeTTN => {
       console.log(error);
     }
   };
-  console.log(record);
+
   const {
     Number,
     Status,
+    StatusCode,
     WarehouseSenderAddress,
     WarehouseRecipientAddress,
     ScheduledDeliveryDate,
@@ -34,15 +34,19 @@ export const TTNDetails = activeTTN => {
   } = record;
 
   return (
-    <InfoWrapper>
-      <span>{Number}</span>
-      <span>{Status}</span>
-      <span>Адреса відправки : {WarehouseSenderAddress}</span>
-      <span>Адреса доставки : {WarehouseRecipientAddress}</span>
-      <span>{ScheduledDeliveryDate}</span>
-      <span>Вартість : {DocumentCost}</span>
-      <span>Сплачує : {PayerType}</span>
-      <span>Вага : {FactualWeight} кг</span>
-    </InfoWrapper>
+    (StatusCode==3)
+    ?(<InfoWrapper>
+    <Span>За таким номером нічого не знайдено</Span>
+    </InfoWrapper>)
+    :(<InfoWrapper>
+      <Span>{Number}</Span>
+      <Span>{Status}</Span>
+      <Visibility><Span>Адреса відправки : {WarehouseSenderAddress}</Span></Visibility>
+      <Visibility><Span>Адреса доставки : {WarehouseRecipientAddress}</Span></Visibility>
+      <Span>{ScheduledDeliveryDate}</Span>
+      <Span>Вартість : {DocumentCost} грн</Span>
+      <Span>Сплачує : {PayerType}</Span>
+      <Span>Вага : {FactualWeight} кг</Span>
+    </InfoWrapper>)
   );
 };

@@ -6,13 +6,12 @@ export const Form = styled.form`
     align-items: center;
     justify-content: center;
     background-color: ${props => props.theme.colors.mainButtonColor};
-    /* width: 90%; */
     height: 250px;
-    padding: 40px;
+    margin-bottom: 15px;
     @media (max-width: 460px) {
-      width: 320px;
+      width: 100%;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 461px) {
       width: 80%;
   }
 `
