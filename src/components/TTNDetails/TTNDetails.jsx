@@ -24,7 +24,6 @@ export const TTNDetails = activeTTN => {
 
   const {
     Number,
-    // CargoDescriptionString,
     Status,
     StatusCode,
     WarehouseSenderAddress,
@@ -38,7 +37,7 @@ export const TTNDetails = activeTTN => {
   const payingPerson = PayerType === 'Sender' ? 'Відправник' : 'Отримувач';
   return StatusCode === 3 ? (
     <InfoWrapper>
-      <Span>За таким номером нічого не знайдено</Span>
+      <Span>За таким номером нічого не знайдено!</Span>
     </InfoWrapper>
   ) : (
     <InfoWrapper>

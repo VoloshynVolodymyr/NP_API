@@ -26,7 +26,7 @@ export const App = () => {
   const updateStorage = (arr) => {
     localStorage.removeItem('invoice')
     localStorage.setItem('invoice', JSON.stringify(arr));
-    setInvoice((JSON.parse(localStorage.getItem('invoice'))) )
+    setInvoice((JSON.parse(localStorage.getItem('invoice'))) );
   }
 
   return (
