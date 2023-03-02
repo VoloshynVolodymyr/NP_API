@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import bg from "../../images/smallBg.jpg";
 
 export const InfoWrapper = styled.div`
     display: flex;
@@ -9,8 +10,10 @@ export const InfoWrapper = styled.div`
     padding-top: 15px;
     padding-bottom: 15px;
     margin-top: 15px;
-    /* width: 640px; */
-    /* height: 250px; */
+    height: 100%;
+    border-radius: 6px;
+    background-image: url('${bg}');
+    background-size: cover;
     @media (max-width: 460px) {
       width: 100%;
   }

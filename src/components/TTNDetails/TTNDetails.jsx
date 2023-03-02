@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 
 export const TTNDetails = activeTTN => {
   const active = activeTTN.activeTTN;
-  const [record, setRecord] = useState('');
+  // console.log(active);
+  const [parcel, setParcel] = useState('');
 
-  let data;
+  let parcelData, cargoData;
   useEffect(() => {
     fetchParcelData(active);
   }, [active]);
@@ -14,8 +15,8 @@ export const TTNDetails = activeTTN => {
   const fetchParcelData = async num => {
     try {
       const parcelDetails = await getParcelData(num);
-      data = await parcelDetails;
-      setRecord(data[0]);
+      parcelData = await parcelDetails;
+      setParcel(parcelData[0]);
     } catch (error) {
       console.log(error);
     }
@@ -23,6 +24,7 @@ export const TTNDetails = activeTTN => {
 
   const {
     Number,
+    // CargoDescriptionString,
     Status,
     StatusCode,
     WarehouseSenderAddress,
@@ -31,10 +33,11 @@ export const TTNDetails = activeTTN => {
     DocumentCost,
     PayerType,
     FactualWeight,
-  } = record;
-
+      } = parcel;
+  // console.log(CargoDescriptionString);
+  const payingPerson = (PayerType==="Sender") ? "Відправник" : "Отримувач";
   return (
-    (StatusCode==3)
+    (StatusCode===3)
     ?(<InfoWrapper>
     <Span>За таким номером нічого не знайдено</Span>
     </InfoWrapper>)
@@ -45,7 +48,7 @@ export const TTNDetails = activeTTN => {
       <Visibility><Span>Адреса доставки : {WarehouseRecipientAddress}</Span></Visibility>
       <Span>{ScheduledDeliveryDate}</Span>
       <Span>Вартість : {DocumentCost} грн</Span>
-      <Span>Сплачує : {PayerType}</Span>
+      <Span>Сплачує : {payingPerson}</Span>
       <Span>Вага : {FactualWeight} кг</Span>
     </InfoWrapper>)
   );

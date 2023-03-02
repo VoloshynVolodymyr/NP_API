@@ -6,8 +6,7 @@ export const ContactForm = ({ onSubmit, invoice }) => {
 
   const handleFormSubmit = e => {
     e.preventDefault();
-    onSubmit({ number });
-    // console.log(invoice);
+    onSubmit( number );
     reset();
   };
 

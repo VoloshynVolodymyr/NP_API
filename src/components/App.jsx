@@ -3,61 +3,37 @@ import { TTNList } from './TTNList/TTNList';
 import { TTNDetails } from './TTNDetails/TTNDetails';
 import React, { useState, useEffect } from 'react';
 import { CommonWrapper } from './App.styled';
-import {getParcelData} from '../services/api/TTH'
 
 export const App = () => {
   const [activeTTN, setActiveTTN] = useState(20450668892412);
-  const [invoice, setInvoice] = useState(JSON.parse(localStorage.getItem('invoice')) || [{}],
+  const [invoice, setInvoice] = useState(JSON.parse(localStorage.getItem('invoice')) || [],
   );
 
   const setActive = (name) => {
     setActiveTTN(name);
   }
 
-  // useEffect(()=>{
-  //   fetchParcelData(activeTTN)
-  // }, [activeTTN])
-
-
   useEffect(() => {
         localStorage.setItem('invoice', JSON.stringify(invoice));
-        if (invoice.length===10) {invoice.pop()}
-        // console.log(invoice);
+        if (invoice.length===5) {invoice.pop()}
   }, [invoice]);
 
   const addTTN = invoice => {
     setInvoice(prevValue => [invoice, ...prevValue]);
+    setActiveTTN(invoice);
   };
 
-  // const fetchParcelData = async (activeTTN) => {
-  //   try {
-  //     const parcelDetails = await getParcelData(activeTTN);
-  //     const {Number, Status, WarehouseSender, WarehouseRecipient, ScheduledDeliveryDate} = parcelDetails[0]
-  //     console.log(Number, Status, WarehouseSender, WarehouseRecipient, ScheduledDeliveryDate);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // fetchParcelData(20450668892412)
-  
- 
+  const updateStorage = (arr) => {
+    localStorage.removeItem('invoice')
+    localStorage.setItem('invoice', JSON.stringify(arr));
+    setInvoice((JSON.parse(localStorage.getItem('invoice'))) )
+  }
 
   return (
-    <CommonWrapper>
+    <CommonWrapper >
       <ContactForm onSubmit={invoice => addTTN(invoice)} />
-    {/* //   <PhonebookWrapper>
-    //     <h1>Phonebook</h1>
-        // <ContactForm onSubmit={contact => addContact(contact)} />
-    //   </PhonebookWrapper>
-
-      // <ContactsWrapper>
-        <h2>Contacts</h2> */}
-        {/* <Filter handleChange={handleChange} filter={filter} />
-        <ContactList contacts={filteredContacts} handleDelete={handleDelete} />
-      </ContactsWrapper> */}
-            <TTNList invoice={invoice} onClick={setActive}/>
-            <TTNDetails activeTTN={activeTTN}/>
-      
+      <TTNList invoice={invoice} onClick={setActive} onClick2={updateStorage}/>
+      <TTNDetails activeTTN={activeTTN}/>
     </CommonWrapper>
   );
 };
