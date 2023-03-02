@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const { API_KEY } = process.env;
+const { REACT_APP_API_KEY } = process.env;
 const PostAPI = axios.create({
     baseURL: 'https://api.novaposhta.ua/v2.0/json/',
   });
@@ -8,7 +8,7 @@ const PostAPI = axios.create({
   export const getParcelData = async (activeTTN) => {
     try {
       const response = await PostAPI.post('', {
-        apiKey: API_KEY,
+        apiKey: REACT_APP_API_KEY,
         "modelName": "TrackingDocument",
         "calledMethod": "getStatusDocuments",
         "methodProperties": {
