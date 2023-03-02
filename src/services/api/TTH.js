@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const { API_KEY } = process.env;
 const PostAPI = axios.create({
     baseURL: 'https://api.novaposhta.ua/v2.0/json/',
   });
