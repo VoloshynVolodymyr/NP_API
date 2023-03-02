@@ -4,12 +4,12 @@ import React, { useState, useEffect } from 'react';
 
 export const TTNDetails = activeTTN => {
   const active = activeTTN.activeTTN;
-  // console.log(active);
   const [parcel, setParcel] = useState('');
 
-  let parcelData, cargoData;
+  let parcelData;
   useEffect(() => {
     fetchParcelData(active);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active]);
 
   const fetchParcelData = async num => {
@@ -33,23 +33,27 @@ export const TTNDetails = activeTTN => {
     DocumentCost,
     PayerType,
     FactualWeight,
-      } = parcel;
-  // console.log(CargoDescriptionString);
-  const payingPerson = (PayerType==="Sender") ? "Відправник" : "Отримувач";
-  return (
-    (StatusCode===3)
-    ?(<InfoWrapper>
-    <Span>За таким номером нічого не знайдено</Span>
-    </InfoWrapper>)
-    :(<InfoWrapper>
+  } = parcel;
+
+  const payingPerson = PayerType === 'Sender' ? 'Відправник' : 'Отримувач';
+  return StatusCode === 3 ? (
+    <InfoWrapper>
+      <Span>За таким номером нічого не знайдено</Span>
+    </InfoWrapper>
+  ) : (
+    <InfoWrapper>
       <Span>{Number}</Span>
       <Span>{Status}</Span>
-      <Visibility><Span>Адреса відправки : {WarehouseSenderAddress}</Span></Visibility>
-      <Visibility><Span>Адреса доставки : {WarehouseRecipientAddress}</Span></Visibility>
+      <Visibility>
+        <Span>Адреса відправки : {WarehouseSenderAddress}</Span>
+      </Visibility>
+      <Visibility>
+        <Span>Адреса доставки : {WarehouseRecipientAddress}</Span>
+      </Visibility>
       <Span>{ScheduledDeliveryDate}</Span>
       <Span>Вартість : {DocumentCost} грн</Span>
       <Span>Сплачує : {payingPerson}</Span>
       <Span>Вага : {FactualWeight} кг</Span>
-    </InfoWrapper>)
+    </InfoWrapper>
   );
 };
